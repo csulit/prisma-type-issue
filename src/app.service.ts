@@ -11,8 +11,18 @@ export class AppService {
     email: true,
   };
 
-  async getUser() {
+  // Return -> Promise<{}[]>
+  async getUserCase1() {
     const users = await this.prisma.user.findMany({ select: this.userSelect });
+
+    return users;
+  }
+
+  // Return -> Promise<{id: string; name: string; email: string;}[]>
+  async getUserCase2() {
+    const users = await this.prisma.user.findMany({
+      select: { id: true, name: true, email: true },
+    });
 
     return users;
   }
